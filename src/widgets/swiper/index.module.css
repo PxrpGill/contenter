@@ -1,0 +1,24 @@
+@import url("@/config/styles/mixins");
+
+.swiper {
+    width: 1800px;
+    outline: none;
+}
+
+.swiperContainer {
+    @mixin responsive gap, 15;
+    @mixin responsive height, 500;
+    @mixin responsive padding-left, 20;
+    @mixin responsive padding-right, 20;
+
+    align-items: center;
+    display: flex;
+    overflow-x: scroll;
+    scroll-behavior: smooth;
+    scroll-snap-type: x mandatory;
+    outline: none;
+
+    &::-webkit-scrollbar {
+        display: none;
+    }
+}

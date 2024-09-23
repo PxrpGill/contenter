@@ -1,0 +1,6 @@
+@import url("@/config/styles/mixins");
+
+.container {
+    @mixin responsive margin-left, 100;
+    @mixin responsive margin-right, 100;
+}
