@@ -35,6 +35,21 @@ export function Swiper() {
     setActiveIndex(activeIndex + 1)
   };
 
+  const perviousSlide = () => {
+    if (activeIndex !== 0) {
+      setActiveIndex(activeIndex - 1)
+    }
+  }
+
+  const nextSlide = () => {
+    if (activeIndex !== swiperData.length - 1) {
+      setActiveIndex(activeIndex + 1);
+    } else if (activeIndex === swiperData.length - 1) {
+      setOpened(false);
+      setActiveIndex(0);
+    }
+  }
+
   return (
     <Container>
       <div className={styles.swiper}>
@@ -58,6 +73,8 @@ export function Swiper() {
           description={swiperData[activeIndex].description}
           image={swiperData[activeIndex].img}
           onComplete={handleComplete}
+          nextSlide={nextSlide}
+          perviousSlide={perviousSlide}
         />
       )}
     </Container>

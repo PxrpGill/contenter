@@ -91,3 +91,25 @@
 .content {
     z-index: 1000;
 }
+
+.buttonLeft {
+    position: absolute;
+    background: none;
+    border: none;
+    outline: none;
+    left: 0;
+    top: 0;
+    width: 50%;
+    height: 100%;
+}
+
+.buttonRight {
+    position: absolute;
+    background: none;
+    border: none;
+    outline: none;
+    right: 0;
+    top: 0;
+    width: 50%;
+    height: 100%;
+}

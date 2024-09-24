@@ -7,12 +7,16 @@ export function SwiperModal({
   opened,
   image,
   onComplete,
+  perviousSlide,
+  nextSlide,
 }: {
   title: string;
   description: string;
   opened: boolean;
   image: { src: string; alt: string };
   onComplete: () => void;
+  nextSlide: () => void;
+  perviousSlide: () => void;
 }) {
   const dialogRef = useRef<HTMLDialogElement>(null);
   const [progress, setProgress] = useState(0);
@@ -20,15 +24,15 @@ export function SwiperModal({
   useEffect(() => {
     let interval = null;
     if (opened) {
-      setProgress(0); 
+      setProgress(0);
       interval = setInterval(() => {
         setProgress((prev) => {
           if (prev >= 1000) {
-            clearInterval(interval!); 
-            onComplete(); 
+            clearInterval(interval!);
+            onComplete();
             return 1000;
           }
-          return prev + 3; 
+          return prev + 3;
         });
       }, 20);
     }
@@ -52,11 +56,13 @@ export function SwiperModal({
         alt={image.alt}
         draggable="false"
       />
+      <button className={styles.buttonLeft} onClick={perviousSlide} />
       <progress className={styles.progress} value={progress} max={1000} />
       <div className={styles.content}>
         <h3 className={styles.title}>{title}</h3>
         <p className={styles.description}>{description}</p>
       </div>
+      <button className={styles.buttonRight} onClick={nextSlide} />
     </dialog>
   );
 }
