@@ -12,29 +12,28 @@ export function SwiperModal({
   description: string;
   opened: boolean;
   image: { src: string; alt: string };
-  onComplete: () => void; // Функция для изменения индекса
+  onComplete: () => void;
 }) {
   const dialogRef = useRef<HTMLDialogElement>(null);
   const [progress, setProgress] = useState(0);
 
-  // Таймер прогресса
   useEffect(() => {
     let interval = null;
     if (opened) {
-      setProgress(0); // Сбрасываем прогресс при открытии
+      setProgress(0); 
       interval = setInterval(() => {
         setProgress((prev) => {
-          if (prev >= 700) {
-            clearInterval(interval!); // Останавливаем таймер
-            onComplete(); // Вызываем onComplete для смены слайда
-            return 700;
+          if (prev >= 1000) {
+            clearInterval(interval!); 
+            onComplete(); 
+            return 1000;
           }
-          return prev + 1; // Прогрессирует каждые 10 мс
+          return prev + 3; 
         });
-      }, 10);
+      }, 20);
     }
 
-    return () => clearInterval(interval!); // Чистим таймер при закрытии или размонтировании
+    return () => clearInterval(interval!);
   }, [opened, onComplete]);
 
   useEffect(() => {
@@ -53,7 +52,7 @@ export function SwiperModal({
         alt={image.alt}
         draggable="false"
       />
-      <progress className={styles.progress} value={progress} max={700} />
+      <progress className={styles.progress} value={progress} max={1000} />
       <div className={styles.content}>
         <h3 className={styles.title}>{title}</h3>
         <p className={styles.description}>{description}</p>

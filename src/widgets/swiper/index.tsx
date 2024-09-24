@@ -12,7 +12,7 @@ export function Swiper() {
   const handleKeyDown = (event: KeyboardEvent) => {
     if (event.key === "Escape") {
       setOpened(false);
-      setActiveIndex(0); // Сбрасываем при закрытии
+      setActiveIndex(0); 
     }
   };
 
@@ -32,14 +32,7 @@ export function Swiper() {
   };
 
   const handleComplete = () => {
-    setActiveIndex((prevIndex) => {
-      const nextIndex = prevIndex + 1;
-      if (nextIndex >= swiperData.length) {
-        setOpened(false); // Закрываем модалку, если достигли конца
-        return 0; // Сбрасываем на первый элемент (если нужно повторение)
-      }
-      return nextIndex; // Иначе переходим на следующий элемент
-    });
+    setActiveIndex(activeIndex + 1)
   };
 
   return (
@@ -64,7 +57,7 @@ export function Swiper() {
           title={swiperData[activeIndex].title}
           description={swiperData[activeIndex].description}
           image={swiperData[activeIndex].img}
-          onComplete={handleComplete} // Передаем функцию смены слайда
+          onComplete={handleComplete}
         />
       )}
     </Container>
