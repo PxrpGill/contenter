@@ -1,0 +1,40 @@
+@import url("@/config/styles/mixins");
+
+.modal {
+    @mixin responsive width, 400;
+    @mixin responsive height, 600;
+    @mixin responsive border-radius, 15;
+
+    position: relative;
+    
+    border: none;
+    outline: none;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    justify-content: end;
+
+    &::backdrop {
+        background-color: rgba(0, 0, 0, 0.8);
+    }
+}
+
+.image {
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    left: 0;
+    top: 0;
+}
+
+.title {
+    @mixin responsive font-size, 40;
+
+    color: #fff;
+}
+
+.description {
+    @mixin responsive font-size, 16;
+    
+    color: #fff;
+}

@@ -1,15 +1,16 @@
 @import url("@/config/styles/mixins");
 
 .swiper {
-    width: 90%;
     outline: none;
+    width: 100%;
+    overflow: auto;
 }
 
 .swiperContainer {
-    @mixin responsive gap, 15;
+    @mixin responsive gap, 25;
     @mixin responsive height, 500;
-    @mixin responsive padding-left, 20;
-    @mixin responsive padding-right, 20;
+    @mixin responsive padding-right, 25;
+    @mixin responsive padding-left, 400;
 
     align-items: center;
     display: flex;
