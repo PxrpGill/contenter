@@ -1,20 +1,18 @@
 import { useState, useEffect, KeyboardEvent } from "react";
-
 import { SwiperElement } from "@/shared/ui/swiper-element";
 import { Container } from "@/shared/ui/container";
 import { SwiperModal } from "@/shared/ui/swiper-modal";
-
 import swiperData from "./data";
 import styles from "./index.module.css";
 
 export function Swiper() {
   const [opened, setOpened] = useState<boolean>(false);
-  const [activeIndex, setActiveIndex] = useState<number | null>(null);
+  const [activeIndex, setActiveIndex] = useState<number>(0); // Начинаем с 0
 
   const handleKeyDown = (event: KeyboardEvent) => {
     if (event.key === "Escape") {
       setOpened(false);
-      setActiveIndex(null);
+      setActiveIndex(0); // Сбрасываем при закрытии
     }
   };
 
@@ -25,15 +23,23 @@ export function Swiper() {
       window.removeEventListener("keydown", handleKeyDown);
     }
 
-    // Удаляем обработчик при размонтировании
-    return () => {
-      window.removeEventListener("keydown", handleKeyDown);
-    };
+    return () => window.removeEventListener("keydown", handleKeyDown);
   }, [opened]);
 
   const handleElementClick = (index: number) => {
     setActiveIndex(index);
     setOpened(true);
+  };
+
+  const handleComplete = () => {
+    setActiveIndex((prevIndex) => {
+      const nextIndex = prevIndex + 1;
+      if (nextIndex >= swiperData.length) {
+        setOpened(false); // Закрываем модалку, если достигли конца
+        return 0; // Сбрасываем на первый элемент (если нужно повторение)
+      }
+      return nextIndex; // Иначе переходим на следующий элемент
+    });
   };
 
   return (
@@ -46,18 +52,19 @@ export function Swiper() {
               description={data.description}
               img={data.img}
               key={indexData}
-              action={() => handleElementClick(indexData + 1)}
+              action={() => handleElementClick(indexData)}
             />
           ))}
         </div>
       </div>
 
-      {activeIndex !== null && (
+      {opened && activeIndex < swiperData.length && (
         <SwiperModal
           opened={opened}
-          title={swiperData[activeIndex - 1].title}
-          description={swiperData[activeIndex - 1].description}
-          image={swiperData[activeIndex - 1].img}
+          title={swiperData[activeIndex].title}
+          description={swiperData[activeIndex].description}
+          image={swiperData[activeIndex].img}
+          onComplete={handleComplete} // Передаем функцию смены слайда
         />
       )}
     </Container>

@@ -12,10 +12,30 @@
     overflow: hidden;
     display: flex;
     flex-direction: column;
-    justify-content: end;
+    justify-content: space-between;
+    box-shadow: 0px 0px 1vw #131111;
+    animation: openModal 0.5s ease;
 
     &::backdrop {
         background-color: rgba(0, 0, 0, 0.8);
+        backdrop-filter: blur(10px);
+        animation: backdropAnimation 0.5s ease;
+    }
+}
+
+@keyframes backdropAnimation {
+    from {
+        background-color: rgba(0, 0, 0, 0);
+        backdrop-filter: blur(0px);
+    }
+}
+
+@keyframes openModal {
+    from {
+        transform: translateX(-100%) translateY(-100%);
+        width: 0px;
+        height: 0px;
+        box-shadow: none;
     }
 }
 
@@ -31,10 +51,43 @@
     @mixin responsive font-size, 40;
 
     color: #fff;
+    animation: textStart 0.5s ease;
 }
 
 .description {
     @mixin responsive font-size, 16;
     
     color: #fff;
+    animation: textStart 0.5s ease;
+}
+
+@keyframes textStart {
+    from {
+        font-size: 0;
+    }
+}
+
+.progress {
+    @mixin responsive height, 5;
+    
+    margin: 0 auto;
+    width: 90%;
+    background-color: rgb(255, 255, 255);
+    z-index: 100;
+    border-radius: 110px;
+    box-shadow: 0px 0px 0.5vw #6b6b6b;
+
+    &::-webkit-progress-bar {
+        background-color: #5e5e5e;
+        border-radius: 110px;
+    }
+
+    &::-webkit-progress-value {
+        background-color: #ffffff;
+        border-radius: 110px;
+    }
+}
+
+.content {
+    z-index: 1000;
 }
