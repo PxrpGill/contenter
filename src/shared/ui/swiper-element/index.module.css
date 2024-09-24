@@ -2,11 +2,10 @@
 
 
 .slide {
-    @mixin responsive width, 250;
-    @mixin responsive height, 400;
+    @mixin responsive width, 144;
+    @mixin responsive height, 144;
     @mixin responsive gap, 10;
-    @mixin responsive padding, 13;
-    @mixin responsive border-radius, 10;
+    @mixin responsive border-radius, 360;
 
     position: relative;
     overflow: hidden;
@@ -17,6 +16,7 @@
     transition: .5s;
     cursor: pointer;
     flex-shrink: 0;
+    border: 0.2vw solid rgb(42, 164, 194);
 
     &:hover {
         box-shadow: 0px 0px 0.4vw rgb(14, 13, 13);
@@ -32,6 +32,7 @@
     left: 0;
     top: 0;
     z-index: 0;
+    object-fit: cover;
 }
 
 .title {

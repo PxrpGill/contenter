@@ -8,7 +8,7 @@
 
 .swiperContainer {
     @mixin responsive gap, 25;
-    @mixin responsive height, 500;
+    @mixin responsive height, 200;
     @mixin responsive padding-right, 25;
     @mixin responsive padding-left, 400;
 
